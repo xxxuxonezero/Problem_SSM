@@ -33,7 +33,9 @@
           </div>
         </div>
         <div class="my-box-bottom">
-
+          <a href=""><i class="iconfont icon-zhuanfa"></i><span></span></a>
+          <a href=""><i class="iconfont icon-pinglun"></i><span></span></a>
+          <a href=""><i class="iconfont icon-dianzan"></i><span></span></a>
         </div>
       </div>
 
@@ -68,5 +70,16 @@
   }
   .my-box-bottom{
     height: 30px;
+    padding-top:5px ;
+    line-height: 25px;
+    text-align: center;
+  }
+  .my-box-bottom>a{
+    width: 33%;
+    display: inline-block;
+    border-right: 1px solid #EBEEF5;
+  }
+  .my-box-bottom>a:last-child{
+    border-right: none;
   }
 </style>

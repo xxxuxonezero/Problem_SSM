@@ -21,7 +21,6 @@
 </template>
 
 <script>
-  import {quillRedefine} from 'vue-quill-editor-upload'
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],  // toggled buttons
     [{'header': 1}, {'header': 2}],    // custom button values
@@ -36,6 +35,7 @@
     ['link', 'image'],
     ['clean']
   ]
+  const imgServer='https://problem-ssm.oss-cn-beijing.aliyuncs.com/'
     export default {
         name: "Editor",
       data(){
@@ -72,17 +72,13 @@
           },
         uploadSuccess:function (resp,file) {
           console.log(file)
-          let port='http://localhost:8089'
           if(resp.code==200){
             let quill=this.$refs.myQuillEditor.quill;
             console.log(quill)
             //获取光标位置
             let length=quill.getSelection().index;
-            alert(resp.url)
-            // let url=port+resp.url
-            // this.src=port+url
-            quill.insertEmbed(length,'image','api'+resp.url)
-            // quill.setSelection(length+1)
+            quill.insertEmbed(length,'image',imgServer+resp.url)
+            quill.setSelection(length+1)
           }else{
             this.$message.error("加载失败...")
           }

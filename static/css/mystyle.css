@@ -6,11 +6,18 @@
   height: 0px;
 }
 .clearfix{
-   zoom: 1;
+  zoom: 1;
 }
 /*设置一个列表大小*/
 .my-box{
+  padding: 5px;
   border:1px solid #DCDFE6;
-  height: 200px;
+  /*height: 200px;*/
   width: 1000px;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
 }

@@ -48,6 +48,10 @@
               <el-form-item label="密码" prop="password">
                 <el-input type="password" v-model="form.password" placeholder="请输入密码"></el-input>
               </el-form-item>
+              <el-form-item label="验证码" prop="vertify_code" >
+                <el-input v-model="form.vertify_code" placeholder="请输入验证码" style="width: 70%"></el-input>
+                <img :src="vertify_img" alt="" @click="changeImg">
+              </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit(form)" class="right">登录</el-button>
                 <el-button @click="LoginVisible = false ">取 消</el-button>
@@ -62,15 +66,18 @@
 
 <script>
   import Login from "./Login";
+  const imgUrl='/api/vertification'
     export default {
         name: "Header",
       data() {
         return {
             isLogin:false,
           LoginVisible:false,
+          vertify_img:imgUrl,
           form:{
             email:'',
             password:'',
+            vertify_code:''
           },
           rules:{
             email:[
@@ -80,6 +87,10 @@
             password:[
               {required: true,message:'请输入密码',trigger:'blur'},
               {min:8,max:12,message: '请输入8-12位密码',trigger: 'blur'}
+            ],
+            vertify_code: [
+              {required:true,message:'请输入验证码',trigger:'blur'},
+              {min:4,max:4,message: '请输入4位验证码',trigger: 'blur'}
             ]
           }
         };
@@ -105,10 +116,13 @@
                 message:'请输入用户名密码',
                 type:'error'
               })
+              this.changeImg()
             }
           })
+        },
+        changeImg:function () {
+          this.vertify_img=imgUrl+'?'+new Date()
         }
-
       }
     }
 </script>
