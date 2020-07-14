@@ -34,30 +34,10 @@
           </div>
           <div class="m-login" v-else>
             <a class="item" @click="LoginVisible=true">登录</a>
-            <a href="" class="item">注册</a>
+            <a class="item" @click="RegisterVisible=true">注册</a>
           </div>
-<!--          登录表单-->
-          <el-dialog
-            title="注册"
-            :visible.sync="LoginVisible"
-            width="30%">
-            <el-form ref="form" :rules="rules" :model="form" label-width="80px" >
-              <el-form-item label="邮箱" prop="email">
-                <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
-              </el-form-item>
-              <el-form-item label="密码" prop="password">
-                <el-input type="password" v-model="form.password" placeholder="请输入密码"></el-input>
-              </el-form-item>
-              <el-form-item label="验证码" prop="vertify_code" >
-                <el-input v-model="form.vertify_code" placeholder="请输入验证码" style="width: 70%"></el-input>
-                <img :src="vertify_img" alt="" @click="changeImg">
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" @click="onSubmit(form)" class="right">登录</el-button>
-                <el-button @click="LoginVisible = false ">取 消</el-button>
-              </el-form-item>
-            </el-form>
-          </el-dialog>
+          <my-login :login-visible="LoginVisible" @changeVisible="LoginVisible=$event"></my-login>
+          <my-register :register-visible="RegisterVisible" @changeVisible="RegisterVisible=$event"></my-register>
         </div>
       </div>
     </div>
@@ -66,63 +46,23 @@
 
 <script>
   import Login from "./Login";
-  const imgUrl='/api/vertification'
+  import Register from "./Register";
+
     export default {
         name: "Header",
       data() {
         return {
-            isLogin:false,
+          isLogin:false,
           LoginVisible:false,
-          vertify_img:imgUrl,
-          form:{
-            email:'',
-            password:'',
-            vertify_code:''
-          },
-          rules:{
-            email:[
-              {required:true,message:'请输入邮箱',trigger:'blur'},
-              {type:'email',message: '请输入正确的邮箱',trigger: 'blur'}
-            ],
-            password:[
-              {required: true,message:'请输入密码',trigger:'blur'},
-              {min:8,max:12,message: '请输入8-12位密码',trigger: 'blur'}
-            ],
-            vertify_code: [
-              {required:true,message:'请输入验证码',trigger:'blur'},
-              {min:4,max:4,message: '请输入4位验证码',trigger: 'blur'}
-            ]
-          }
-        };
+          RegisterVisible:false
+        }
       },
       components:{
-        'my-login':Login
+        'my-login':Login,
+        'my-register':Register
       },
       methods: {
-        onSubmit:function (form) {
-          let vm=this
-          this.$refs.form.validate((valid)=>{
-            if(valid){
-              // vm.axios({
-              //   url:''
-              // })
-              this.$message({
-                message:'登录成功',
-                type:'success'
-              })
-              this.LoginVisible=false
-            }else{
-              this.$message({
-                message:'请输入用户名密码',
-                type:'error'
-              })
-              this.changeImg()
-            }
-          })
-        },
-        changeImg:function () {
-          this.vertify_img=imgUrl+'?'+new Date()
-        }
+
       }
     }
 </script>

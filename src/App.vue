@@ -17,9 +17,6 @@ export default {
     'myFooter':Footer,
     'myIndexContainer':IndexContainer
   },
-  created() {
-    console.log(serverPort)
-  }
 
 }
 </script>

@@ -8,7 +8,6 @@ import VueAxios from "vue-axios";
 import Axios from "axios";
 //引入富文本编辑器
 import  VueQuillEditor from 'vue-quill-editor'
-import QuillRedefine from 'vue-quill-editor-upload'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
