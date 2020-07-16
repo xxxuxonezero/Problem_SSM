@@ -3,7 +3,7 @@
     <!--          登录表单-->
     <el-dialog
       title="登录"
-      :visible.sync="LoginVisibleChange"
+      :visible.sync="LoginVisible"
       width="30%">
       <el-form ref="form" :rules="rules" :model="form" label-width="80px" >
         <el-form-item label="邮箱" prop="email">
@@ -45,7 +45,7 @@
           ],
           password:[
             {required: true,message:'请输入密码',trigger:'blur'},
-            {min:8,max:12,message: '请输入8-12位密码',trigger: 'blur'}
+            {min:6,max:12,message: '请输入8-12位密码',trigger: 'blur'}
           ],
           vertify_code: [
             {required:true,message:'请输入验证码',trigger:'blur'},
@@ -59,14 +59,29 @@
         let vm=this
         this.$refs.form.validate((valid)=>{
           if(valid){
-            // vm.axios({
-            //   url:''
-            // })
-            this.$message({
-              message:'登录成功',
-              type:'success'
+            let data={'email':vm.form.email,'password':vm.form.password,'code':vm.form.vertify_code}
+            vm.axios({
+              url: '/login',
+              baseURL: vm.api.server,
+              method:'post',
+              data:vm.api.transformData(data)
             })
-            this.LoginVisible=false
+            .then(resp=>{
+              if(resp.data==''){
+                vm.$message({
+                  message:'登录成功',
+                  type:'success'
+                })
+                vm.changeVisible()
+              }
+              else{
+                vm.$message({
+                  message: resp.data,
+                  type:'error'
+                })
+                vm.changeImg()
+              }
+            })
           }else{
             this.$message({
               message:'请输入用户名密码',
@@ -82,14 +97,9 @@
       //因为在子组件中无法改变父组件中传过来的值，所以选择把要修改的值传给父组件，再由父组件重新传过来
       changeVisible(){
         this.$emit('changeVisible',false)
-      }
+      },
     },
     props:['LoginVisible'],
-    computed:{
-      LoginVisibleChange(){
-        return this.LoginVisible
-      }
-    }
 
   }
 </script>

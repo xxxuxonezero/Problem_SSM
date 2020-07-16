@@ -54,7 +54,7 @@
         return {
           isLogin:false,
           LoginVisible:false,
-          RegisterVisible:false
+          RegisterVisible:false,
         }
       },
       components:{

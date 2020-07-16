@@ -3,6 +3,7 @@
     <myHeader></myHeader>
     <myIndexContainer></myIndexContainer>
     <myFooter></myFooter>
+    <p>{{server}}</p>
   </div>
 </template>
 
@@ -17,6 +18,11 @@ export default {
     'myFooter':Footer,
     'myIndexContainer':IndexContainer
   },
+  data() {
+    return{
+      server:this.api.server
+    }
+  }
 
 }
 </script>

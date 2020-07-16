@@ -11,13 +11,15 @@ import  VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+//导入api
+import api from "./assets/js/api";
 
 
 Vue.use(VueAxios, Axios);
 Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
-// Vue.use(QuillRedefine)
-
+Vue.prototype.api=api
+Axios.defaults.withCredentials=true
 
 /* eslint-disable no-new */
 new Vue({
