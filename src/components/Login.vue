@@ -4,9 +4,11 @@
     <el-dialog
       title="登录"
       :visible.sync="LoginVisible"
+      :show-close="false"
+      :close-on-click-modal="false"
       width="30%">
       <el-form ref="form" :rules="rules" :model="form" label-width="80px" >
-        <el-form-item label="邮箱" prop="email">
+        <el-form-item label="邮箱" prop="email" >
           <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">

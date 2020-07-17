@@ -11,7 +11,6 @@ export default {
     ],
     password:[
       {required: true,message:'请输入密码',trigger:'blur'},
-      {min:8,max:12,message: '请输入8-12位密码',trigger: 'blur'}
     ],
     vertify_code: [
       {required:true,message:'请输入验证码',trigger:'blur'},
