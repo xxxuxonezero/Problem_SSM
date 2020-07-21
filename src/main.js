@@ -13,16 +13,23 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 //导入api
 import api from "./assets/js/api";
+//状态管理
+import store from "./store";
+import router from "./router/router";
 
 
 Vue.use(VueAxios, Axios);
 Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
 Vue.prototype.api=api
+//是否携带cookeies
 Axios.defaults.withCredentials=true
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
+  router,
   render:h=>h(App)
 })

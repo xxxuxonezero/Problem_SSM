@@ -3,12 +3,12 @@
     <div class="ui container">
       <div class="ui inverted secondary menu">
         <h2 class="ui teal header item">onezero</h2>
-        <a href="" class="item">首页</a>
+        <a class="item" @click="$router.push('/trend')">首页</a>
         <el-dropdown>
-          <a href="" class="item">题库</a>
+          <a class="item" @click="$router.push('/problem')">题库</a>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>试题广场</el-dropdown-item>
-            <el-dropdown-item>专项练习</el-dropdown-item>
+            <el-dropdown-item><a @click="$router.push('/problem/problemground')">试题广场</a></el-dropdown-item>
+            <el-dropdown-item><a @click="$router.push('/problem/practice')">专项练习</a></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <a href="" class="item">视频</a>
@@ -27,6 +27,7 @@
                 <el-dropdown-item>我的收藏</el-dropdown-item>
                 <el-dropdown-item>我的错题</el-dropdown-item>
                 <el-dropdown-item>个人信息</el-dropdown-item>
+                <el-dropdown-item>我的动态</el-dropdown-item>
                 <el-dropdown-item>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -63,7 +64,7 @@
       },
       methods: {
 
-      }
+      },
     }
 </script>
 

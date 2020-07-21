@@ -21,3 +21,11 @@
 .left{
   float: left;
 }
+.center{
+  text-align: center;
+}
+.card{
+  border: 1px solid #E4E7ED;
+  border-radius: 0.5em;
+  box-shadow:0.5px 0.5px #8793a2;
+}

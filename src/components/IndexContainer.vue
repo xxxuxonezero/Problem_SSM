@@ -7,12 +7,11 @@
       <my-trends-list></my-trends-list>
     </el-container>
   </div>
-
 </template>
 
 <script>
   import Editor from "./Editor";
-  import TrendsList from "./TrendsList";
+  import TrendsList from "./trend/TrendsList";
     export default {
         name: "IndexContainer",
       components:{

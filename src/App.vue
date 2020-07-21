@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <myHeader></myHeader>
-    <myIndexContainer></myIndexContainer>
+    <router-view></router-view>
     <myFooter></myFooter>
-    <p>{{server}}</p>
   </div>
 </template>
 
@@ -11,17 +10,23 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import IndexContainer from "./components/IndexContainer";
+import Trend from "./views/trend/Trend";
 export default {
   name: 'App',
   components:{
     'myHeader':Header,
     'myFooter':Footer,
-    'myIndexContainer':IndexContainer
+    'myIndexContainer':IndexContainer,
+    'trend':Trend
   },
   data() {
     return{
       server:this.api.server
     }
+  },
+  methods:{
+  },
+  computed:{
   }
 
 }
