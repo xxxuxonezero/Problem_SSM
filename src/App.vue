@@ -33,5 +33,15 @@ export default {
 </script>
 
 <style>
-
+  .el-rate__icon{
+    font-size: 40px;
+  }
+  .el-rate{
+    height: auto;
+    text-align: center;
+    margin: 10px auto;
+  }
+  .ql-editor{
+    height: 200px;
+  }
 </style>

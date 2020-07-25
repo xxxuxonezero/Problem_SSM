@@ -30,11 +30,13 @@
 
 <script>
   const imgUrl='/api/vertification'
+  var _this
   export default {
     name: "Login",
     data(){
       return{
         vertify_img:imgUrl,
+        // LoginVisible:this.$store.getters.getLoginVisivble,
         form:{
           email:'',
           password:'',
@@ -98,10 +100,17 @@
       },
       //因为在子组件中无法改变父组件中传过来的值，所以选择把要修改的值传给父组件，再由父组件重新传过来
       changeVisible(){
-        this.$emit('changeVisible',false)
+        // this.$emit('changeVisible',false)
+        this.$store.commit('changeLoginVisible',false)
       },
     },
-    props:['LoginVisible'],
+    computed:{
+      LoginVisible(){
+        return this.$store.state.LoginVisible
+      }
+    }
+    // props:['LoginVisible'],
+
 
   }
 </script>

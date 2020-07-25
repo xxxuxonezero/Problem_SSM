@@ -25,6 +25,7 @@ Vue.prototype.api=api
 //是否携带cookeies
 Axios.defaults.withCredentials=true
 
+// Vue.prototype.$http.interceptors.response.use()
 
 /* eslint-disable no-new */
 new Vue({

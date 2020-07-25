@@ -34,10 +34,10 @@
             <a href="" class="item">发帖</a>
           </div>
           <div class="m-login" v-else>
-            <a class="item" @click="LoginVisible=true">登录</a>
+            <a class="item" @click="changeLoginVisible">登录</a>
             <a class="item" @click="RegisterVisible=true">注册</a>
           </div>
-          <my-login :login-visible="LoginVisible" @changeVisible="LoginVisible=$event"></my-login>
+          <my-login></my-login>
           <my-register :register-visible="RegisterVisible" @changeVisible="RegisterVisible=$event"></my-register>
         </div>
       </div>
@@ -63,7 +63,9 @@
         'my-register':Register
       },
       methods: {
-
+        changeLoginVisible(){
+          this.$store.commit('changeLoginVisible',true)
+        }
       },
     }
 </script>

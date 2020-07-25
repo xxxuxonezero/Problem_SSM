@@ -1,8 +1,8 @@
 <template>
 <div>
     <el-upload class="img-uploader"
-               :action="serverUrl"
                name="img"
+               :action="serverUrl"
                :accept="accept"
                :show-file-list="false"
                :on-success="uploadSuccess"
@@ -12,7 +12,7 @@
     <quill-editor ref="myQuillEditor" v-model="content"
                   :options="editorOption" class="my-editor" />
      <div class="my-submit-btn">
-       <el-button type="primary" @click="submit">发布动态
+       <el-button type="primary" @click="submit" v-text="btnMsg">
        </el-button>
      </div>
 
@@ -68,8 +68,19 @@
       },
       methods:{
           submit:function () {
+            if(this.BtnCode==1){
 
+            }else if(this.BtnCode==2){
+              console.log("ghiuw")
+            }
           },
+        // uploadImg:function(){
+        //   this.api.service({
+        //     url:'/img/upload',
+        //     method:'post'
+        //
+        //   })
+        // },
         uploadSuccess:function (resp,file) {
           console.log(file)
           if(resp.code==200){
@@ -86,8 +97,14 @@
 
         },
         uploadError:function () {
-          this.$message.error("加载失败...")
-          this.quillUpdateImg=false
+          if (!this.$store.isLogin) {
+            this.$message.error("请登录...")
+            this.$store.commit('changeLoginVisible', true);
+          }
+          else{
+            this.$message.error('加载失败...')
+          }
+          this.quillUpdateImg=false;
         },
         beforeUpload:function (file) {
           this.quillUpdateImg=true
@@ -97,17 +114,28 @@
             this.content=html
         }
       },
+      props: {
+        'BtnCode':{
+          type:Number
+        }
+      },
+      computed:{
+          btnMsg(){
+            if(this.BtnCode==1){
+              return '发布动态'
+            }
+            else if(this.BtnCode==2){
+              return '评论'
+            }
+          }
+      }
 
     }
 </script>
 
 <style scoped>
-  .my-editor{
-    height: 200px;
-    width: 1000px;
-  }
   .my-submit-btn{
     float: right;
-    margin-top: 50px;
+    margin-top: 10px;
   }
 </style>
