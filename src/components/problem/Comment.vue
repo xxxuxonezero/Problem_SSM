@@ -10,7 +10,7 @@
         <div class="metadata">
           <span class="date">{{comment.uploadTime}}</span>
         </div>
-        <div class="text">{{comment.content}}</div>
+        <div class="text" v-html="comment.content"></div>
         <div class="actions">
           <a class="reply">Reply</a>
         </div>

@@ -9,16 +9,16 @@
       </el-container>
     </div>
     <!--v-if="isLogin"-->
-    <div class="user_info right">
+    <div class="user_info right" v-if="isLogin">
       <el-card class="user_info_card">
         <div class="user_info_header center">
           <el-avatar shape="circle" :size="60"
           class="user_info_avatar left"
-          :src="avatarUrl"></el-avatar>
+          :src="user.avatar"></el-avatar>
           <span class="username">{{user.username}}</span>
           <br>
           <br>
-          <span>已经连续登录{{user.loginDays}}天</span>
+          <span>上次登录时间：{{user.lasttime}}天</span>
         </div>
         <div class="user_info_body center">
           <a class="user_item" @click="">上传题目数 <span>{{user.uploadProNum}}</span></a>
@@ -42,17 +42,20 @@
     data(){
       return{
         avatarUrl:'',
-        user:{
-          username:'xxx',
-          loginDays:10,
-          uploadProNum:12,
-          trendNum:5
-        }
+        // user:{
+        //   username:'xxx',
+        //   loginDays:10,
+        //   uploadProNum:12,
+        //   trendNum:5
+        // }
       }
     },
     computed:{
       isLogin(){
         return this.$store.state.isLogin
+      },
+      user(){
+        return this.$store.getters.getUserInfo
       }
     },
     methods:{

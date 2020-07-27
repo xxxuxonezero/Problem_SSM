@@ -49,7 +49,7 @@
           ],
           password:[
             {required: true,message:'请输入密码',trigger:'blur'},
-            {min:6,max:12,message: '请输入8-12位密码',trigger: 'blur'}
+            {min:6,max:12,message: '请输入6-12位密码',trigger: 'blur'}
           ],
           vertify_code: [
             {required:true,message:'请输入验证码',trigger:'blur'},
@@ -71,16 +71,18 @@
               data:vm.api.transformData(data)
             })
             .then(resp=>{
-              if(resp.data==''){
+              console.log(resp)
+              if(resp.data.user!=null){
                 vm.$message({
-                  message:'登录成功',
+                  message:resp.data.msg,
                   type:'success'
                 })
+                vm.$store.commit('setUserInfo',resp.data.user)
                 vm.changeVisible()
               }
               else{
                 vm.$message({
-                  message: resp.data,
+                  message: resp.data.msg,
                   type:'error'
                 })
                 vm.changeImg()

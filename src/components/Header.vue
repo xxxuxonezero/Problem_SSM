@@ -19,19 +19,20 @@
             <i class="search link icon"></i>
           </div>
           <div class="m-login" v-if="isLogin">
-            <el-dropdown>
+            <el-dropdown @command="handle">
               <span class="el-dropdown-lis item">
-                <img src="../assets/img/EXo9mSKU0AABu2E.jpeg" alt="" class="circle-img">
+                <img :src="userInfo.avatar" alt="" class="circle-img">
               </span>
-              <el-dropdown-menu slot="dropdown">
+              <el-dropdown-menu slot="dropdown" >
                 <el-dropdown-item>我的收藏</el-dropdown-item>
                 <el-dropdown-item>我的错题</el-dropdown-item>
                 <el-dropdown-item>个人信息</el-dropdown-item>
                 <el-dropdown-item>我的动态</el-dropdown-item>
-                <el-dropdown-item>退出</el-dropdown-item>
+                <el-dropdown-item command="logout">退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
             <a href="" class="item">发帖</a>
+            <a class="item" @click="$router.push('/problem/add')">添加题目</a>
           </div>
           <div class="m-login" v-else>
             <a class="item" @click="changeLoginVisible">登录</a>
@@ -53,7 +54,6 @@
         name: "Header",
       data() {
         return {
-          isLogin:false,
           LoginVisible:false,
           RegisterVisible:false,
         }
@@ -65,8 +65,31 @@
       methods: {
         changeLoginVisible(){
           this.$store.commit('changeLoginVisible',true)
+        },
+        handle(command){
+          let _this=this
+          if(command=='logout'){
+            console.log('gskh')
+            this.api.service({
+              url:'/exit',
+              method:'post'
+            }).then(resp=>{
+                _this.$store.commit('delUserInfo')
+              })
+          }
         }
       },
+      computed:{
+          isLogin(){
+            return this.$store.state.isLogin
+          },
+          userInfo(){
+            return this.$store.getters.getUserInfo
+          }
+      },
+      mounted() {
+
+      }
     }
 </script>
 

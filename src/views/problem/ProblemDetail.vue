@@ -32,7 +32,7 @@
       <div>
         <comment-box style="width: 763px" :BtnCode="btnCode"></comment-box>
       </div>
-      <div class="common-list" v-loading="loading">
+      <div class="common-list">
         <comment-list :comments="comments"></comment-list>
       </div>
     </div>

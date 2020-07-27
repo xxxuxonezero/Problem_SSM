@@ -45,6 +45,13 @@ const router=new VueRouter({
     {
       path:'/problem/practice',
       component:()=>import('@/views/problem/Practice')
+    },
+    {
+      path: '/problem/add',
+      component:()=>import('@/views/problem/Add'),
+      meta:{
+        title:'添加试题'
+      }
     }
 
   ],

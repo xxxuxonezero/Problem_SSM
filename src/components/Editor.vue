@@ -10,11 +10,11 @@
                :before-upload="beforeUpload">
     </el-upload>
     <quill-editor ref="myQuillEditor" v-model="content"
-                  :options="editorOption" class="my-editor" />
-     <div class="my-submit-btn">
-       <el-button type="primary" @click="submit" v-text="btnMsg">
-       </el-button>
-     </div>
+                  :options="editorOption" class="my-editor" @change="sendContent"/>
+<!--     <div class="my-submit-btn">-->
+<!--       <el-button type="primary" @click="submit" v-text="btnMsg">-->
+<!--       </el-button>-->
+<!--     </div>-->
 
  </div>
 
@@ -67,20 +67,24 @@
           }
       },
       methods:{
-          submit:function () {
-            if(this.BtnCode==1){
-
-            }else if(this.BtnCode==2){
-              console.log("ghiuw")
-            }
-          },
-        // uploadImg:function(){
-        //   this.api.service({
-        //     url:'/img/upload',
-        //     method:'post'
-        //
-        //   })
-        // },
+          // submit:function () {
+          //   let _this=this
+          //   if(this.BtnCode==1){
+          //
+          //   }else if(this.BtnCode==2){
+          //     this.api.service({
+          //       url:'/user/quesComment',
+          //       method:'post',
+          //       data:this.api.transformData({qId:_this.$route.params.id,
+          //         content:_this.content,uId:_this.userInfo.user_id,parentId:null})
+          //     })
+          //     .then(resp=>{
+          //       console.log('success');
+          //     })
+          //   }else if(this.BtnCode==3){
+          //
+          //   }
+          // },
         uploadSuccess:function (resp,file) {
           console.log(file)
           if(resp.code==200){
@@ -109,25 +113,15 @@
         beforeUpload:function (file) {
           this.quillUpdateImg=true
         },
-        onEditorChange:function ({editor,html,text}) {
-            console.log(html)
-            this.content=html
-        }
-      },
-      props: {
-        'BtnCode':{
-          type:Number
+        //把编辑框中的数据传递给父组件
+        sendContent(){
+          this.$emit('getContent', this.content);
         }
       },
       computed:{
-          btnMsg(){
-            if(this.BtnCode==1){
-              return '发布动态'
-            }
-            else if(this.BtnCode==2){
-              return '评论'
-            }
-          }
+        userInfo(){
+            return this.$store.getters.getUserInfo
+        }
       }
 
     }
