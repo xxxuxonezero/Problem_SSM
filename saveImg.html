@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="https://img.jbzj.com/file_images/article/201609/2016090113572748.png" alt="">
+<button onclick="saveFile()">保存图片</button>
+</body>
+<script>
+    function saveFile() {
+        var fileUrl = "https://img.jbzj.com/file_images/article/201609/2016090113572748.png";
+        var fileName = "gjkse";
+        if (window.navigator.msSaveOrOpenBlob) {
+            var baseStr = atob(fileUrl.split(',')[1]);
+            var baseStrLength = baseStr.length;
+            var u8arr = new Uint8Array(baseStrLength);
+            while (baseStrLength--) {
+                u8arr[baseStrLength] = baseStr.charCodeAt(baseStrLength);
+            }
+            var blob = new Blob([u8arr]);
+            window.navigator.msSaveOrOpenBlob(blob, fileName + '.' + 'jpeg');
+        } else {
+            var saveLink = document.createElement('a');
+            saveLink.href = fileUrl;
+            saveLink.download = fileName;
+            saveLink.click();
+        }
+    }
+</script>
+</html>
